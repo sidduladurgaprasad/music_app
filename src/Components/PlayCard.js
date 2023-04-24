@@ -10,7 +10,7 @@ function SongCard({ song, isPlaying, isFavourite, handlePlay, handleFav}) {
 
 
   return (
-      <div className='col-3 musicCard m-4'>
+      <div className='col-10 col-lg-3 col-md-5 musicCard m-4'>
         <h6>Song : {song.title}</h6>
         <p>Movie : {song.Movie}</p>
         <p>Language : {song.Lang}</p>
@@ -73,7 +73,7 @@ function PlayCard({songList, isFavourite, setFavourite}) {
       </div>
       <div className='container'>
         {console.log(isFavourite)}
-        <div className='row'>
+        <div className='row justify-content-around'>
           {
             songList.map((song, index) => (
               <SongCard 

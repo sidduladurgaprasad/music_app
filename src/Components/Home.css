@@ -1,0 +1,9 @@
+.title{
+    position: absolute;
+    left: 10%;
+    top: 30%;
+    font-size: 3vw;
+    font-weight: bolder;
+    font-family:cursive;
+    color: white;
+}

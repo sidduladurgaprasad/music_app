@@ -8,6 +8,7 @@ import Favourites from './Components/Favourites';
 
 function App() {
   let [enter,setEnter] = useState(false);
+  let [navclick,SetNavClick] = useState(false);
 
   const songList = [
     {
@@ -100,14 +101,20 @@ function App() {
         (enter == true) &&
         <div>
           <div className='navbar'>
-            <img src={logo} className="App-logo" alt="logo" />
-            <ul>
-              <Link to="/home">Home</Link>
-              <Link to="/songs">Songs</Link>
-              <Link to="/favourites">Favourites</Link>
+            <div className="App-logo" />
+            <ul onClick={()=>{SetNavClick(true)}}>
+              <li><Link to="/home">Home</Link></li>
+              <li><Link to="/songs">Songs</Link></li>
+              <li><Link to="/favourites">Favourites</Link></li>
             </ul>
           </div>
-          <Outlet/>
+          {
+            (navclick) && <Outlet/>
+          }
+          {
+            (!navclick) && <Home/>
+          }
+          
         </div>
       }
       <Routes>

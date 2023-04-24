@@ -4,10 +4,10 @@ import { FaHeart } from 'react-icons/fa';
 import './PlayCard.css';
 
 
-function FavSongCard({ song, isPlaying, isFavourite, handlePlay, handleFav}) {
+function FavSongCard({ song, isPlaying, isFavourite, handlePlay, handleFav, setEmpty}) {
 
   return (
-      <div className='col-3 musicCard m-4'>
+      <div  className='col-10 col-lg-3 col-md-5 musicCard m-4'>
         <h6>Song : {song.title}</h6>
         <p>Movie : {song.Movie}</p>
         <p>Language : {song.Lang}</p>
@@ -17,6 +17,9 @@ function FavSongCard({ song, isPlaying, isFavourite, handlePlay, handleFav}) {
         <button onClick={handlePlay}>{isPlaying ? 'PAUSE' : 'PLAY'}</button>
         <button onClick={handleFav}><FaHeart color={isFavourite[song.id - 1] ? 'red' : 'gray'} />
         </button>
+        {
+          setEmpty(false)
+        }
       </div>
   );
 }
@@ -26,7 +29,7 @@ function Favourites({songList, isFavourite, setFavourite}) {
   const [audio, setAudio] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentSongIndex, setCurrentSongIndex] = useState(null);
-  
+  const [empty, setEmpty] = useState(true);
   //console.log(isFavourite)
   const handlePlay = (index) => {
     if (audio && isPlaying && index === currentSongIndex) {
@@ -49,6 +52,7 @@ function Favourites({songList, isFavourite, setFavourite}) {
       let temp = [...isFavourite];
       temp[index] = !isFavourite[index]
       setFavourite(temp)
+      setEmpty(empty)
   };
 
   
@@ -73,6 +77,7 @@ function Favourites({songList, isFavourite, setFavourite}) {
         <div className='row'>
           {
             songList.map((song, index) => (
+            
               (isFavourite[index]==true) && 
               <FavSongCard 
                 key={song.id}
@@ -82,10 +87,14 @@ function Favourites({songList, isFavourite, setFavourite}) {
                 handlePlay={() => handlePlay(index)}
                 handleFav={() => handleFav(index,isFavourite)}
                 setFavourite={() => setFavourite()}
+                setEmpty={() => setEmpty()}
               />
             ))
           }   
         </div>
+        {
+          (empty) && <h1>No Favourites</h1> 
+        }
       </div>
     </div>
   );
